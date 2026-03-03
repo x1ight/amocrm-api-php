@@ -512,8 +512,14 @@ trait AmoAPIRequest
      */
     private static function throttle(string $domain): void
     {
+        // Если троттлинг отключён (throttle <= 0), пропускаем без деления на ноль
+        if (self::$throttle <= 0.0) {
+            self::$lastRequestTime[$domain] = microtime(true);
+            return;
+        }
+
         $lastTime = self::$lastRequestTime[$domain] ?? 0.0;
-        $usleep   = intval(1E6 * ($lastTime + 1 / self::$throttle - microtime(true)));
+        $usleep   = (int) (1E6 * ($lastTime + 1.0 / self::$throttle - microtime(true)));
 
         if ($usleep > 0) {
             $throttleTime = sprintf('%0.4f', $usleep / 1E6);
