@@ -75,7 +75,7 @@ class AmoAPI
     public static function saveObjectsWithLimit(
         $amoObjects,
         bool $returnResponses = false,
-        $subdomain = null,
+        ?string $subdomain = null,
         $limit = 250
     ):array {
         if (! is_array($amoObjects)) {

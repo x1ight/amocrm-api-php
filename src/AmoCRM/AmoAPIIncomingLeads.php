@@ -67,7 +67,7 @@ trait AmoAPIIncomingLeads
     public static function saveIncomingObjectsWithLimit(
         $amoObjects,
         bool $returnResponses = false,
-        $subdomain = null,
+        ?string $subdomain = null,
         $limit = 250
     ):array {
         if (! is_array($amoObjects)) {
