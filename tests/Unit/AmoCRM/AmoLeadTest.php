@@ -14,7 +14,7 @@ class AmoLeadTest extends TestCase
      */
     private $amoLead;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->amoLead = new AmoLead();

@@ -83,6 +83,7 @@ class AmoTask extends AmoObject
      * Приводит модель к формату для передачи в API
      * @return array
      */
+    #[\Override]
     public function getParams() :array
     {
         $params = [];

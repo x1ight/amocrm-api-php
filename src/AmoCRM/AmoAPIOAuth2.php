@@ -204,7 +204,7 @@ trait AmoAPIOAuth2
         $lastAuth = self::$lastAuth[ $subdomain ];
 
         // Выходим, если это запрос по протоколу OAuth 2.0
-        if (stripos($lastRequest['query'], '/oauth2/access_token') !== false) {
+        if (stripos((string) $lastRequest['query'], '/oauth2/access_token') !== false) {
             return true;
         }
 
