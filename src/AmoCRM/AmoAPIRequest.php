@@ -691,11 +691,7 @@ trait AmoAPIRequest
      */
     protected static function debug(string $message = ''): void
     {
-        $dateTime = DateTime::createFromFormat('U.u', sprintf('%.f', microtime(true)));
-        $timeZone = new DateTimeZone(date_default_timezone_get());
-        $dateTime->setTimezone($timeZone);
-        $timeString = $dateTime->format('Y-m-d H:i:s.u P');
-
+        $timeString = (new DateTime())->format('Y-m-d H:i:s.u P');
         $uniqId  = self::getUniqId();
         $message = "*** {$uniqId} [{$timeString}]" . PHP_EOL . $message . PHP_EOL . PHP_EOL;
 
