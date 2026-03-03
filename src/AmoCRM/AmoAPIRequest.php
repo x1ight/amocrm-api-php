@@ -390,7 +390,7 @@ trait AmoAPIRequest
                 $errorMessages = array_merge(
                     $errorMessages,
                     array_map(
-                        static fn ($index, $value) => "{$index} -> {$value}",
+                        static fn ($index, $value): string => "{$index} -> {$value}",
                         array_keys($errors['update']),
                         $errors['update']
                     )
@@ -400,7 +400,7 @@ trait AmoAPIRequest
                 $errorMessages = array_merge(
                     $errorMessages,
                     array_map(
-                        static fn ($index, $value) => "{$index} -> {$value}",
+                        static fn ($index, $value): string => "{$index} -> {$value}",
                         array_keys($errors['add']),
                         $errors['add']
                     )

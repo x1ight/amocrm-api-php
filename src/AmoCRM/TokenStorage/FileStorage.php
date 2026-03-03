@@ -24,18 +24,11 @@ namespace AmoCRM\TokenStorage;
 class FileStorage implements TokenStorageInterface
 {
     /**
-     * Каталог для хранения файлов с токенами
-     * @var string
-     */
-    protected $storageFolder;
-
-    /**
      * Конструктор
      * @param string $storageFolder Каталог для хранения файлов с токенами
      */
-    public function __construct(string $storageFolder = '')
+    public function __construct(protected string $storageFolder = '')
     {
-        $this->storageFolder = $storageFolder;
     }
 
     /**
@@ -45,7 +38,7 @@ class FileStorage implements TokenStorageInterface
      * @return void
      * @throws TokenStorageException
      */
-    public function save(array $tokens, string $domain)
+    public function save(array $tokens, string $domain): void
     {
         $tokensFile =  $this->getTokensFileName($domain);
 

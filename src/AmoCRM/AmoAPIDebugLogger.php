@@ -22,9 +22,8 @@ class AmoAPIDebugLogger
 {
     /**
      * Лог файл для сохранения отладочной информации
-     * @var string
      */
-    protected $logFile;
+    protected string $logFile;
 
     /**
      * Конструктор
@@ -42,7 +41,7 @@ class AmoAPIDebugLogger
      * @return void
      * @throws AmoAPIException
      */
-    public function debug(string $message)
+    public function debug(string $message): void
     {
         if (! file_put_contents($this->logFile, $message, FILE_APPEND|LOCK_EX)) {
             throw new AmoAPIException("Не удалось записать в лог файл {$this->logFile}");

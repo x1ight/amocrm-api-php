@@ -95,7 +95,7 @@ trait AmoAPIIncomingLeads
      * @return array
      * @throws AmoAPIException
      */
-    public static function saveIncomingObjects($amoObjects, bool $returnResponses = false, $subdomain = null) :array
+    public static function saveIncomingObjects($amoObjects, bool $returnResponses = false, ?string $subdomain = null) :array
     {
         if (! is_array($amoObjects)) {
             $amoObjects = [ $amoObjects ];

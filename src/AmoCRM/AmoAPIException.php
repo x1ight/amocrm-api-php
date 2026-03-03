@@ -50,7 +50,7 @@ class AmoAPIException extends Exception
      * Устанавливает массив сообщений об ошибках
      * @param array $errors Массив сообщений об ошибках
      */
-    public function setErrors($errors)
+    public function setErrors($errors): void
     {
         $this->errors = $errors;
     }
@@ -67,7 +67,7 @@ class AmoAPIException extends Exception
      * Устанавливает массив ответов items
      * @param array $errors Массив ответов items
      */
-    public function setItems($items)
+    public function setItems($items): void
     {
         $this->items = $items;
     }
