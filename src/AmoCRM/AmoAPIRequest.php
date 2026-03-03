@@ -232,6 +232,9 @@ trait AmoAPIRequest
      * Отправляет запрос к amoCRM API
      *
      * @param array<string, mixed> $params Параметры запроса
+     * @param array<string, string> $headers Кастомные HTTP-заголовки для этого запроса.
+     *                                       Перекрывают $customHeaders и стандартные заголовки.
+     *                                       Пример: ['X-Trace-Id' => 'abc123', 'Accept-Language' => 'ru']
      * @return array<string, mixed>|null
      * @throws AmoAPIException
      */
@@ -239,7 +242,8 @@ trait AmoAPIRequest
         string $query,
         string $type = 'GET',
         array $params = [],
-        ?string $subdomain = null
+        ?string $subdomain = null,
+        array $headers = []
     ): ?array {
         // Если поддомен не указан, то используем последний поддомен, переданный при авторизации
         if (!isset($subdomain)) {
@@ -276,7 +280,7 @@ trait AmoAPIRequest
                 if (count($params)) {
                     $url .= '?' . http_build_query($params);
                 }
-                $headers     = self::buildHTTPHeaders($subdomain, false);
+                $headers     = self::buildHTTPHeaders($subdomain, false, false, $headers);
                 $requestInfo = " (GET: {$url})";
                 self::debug('[' . self::$requestCounter . "] GET: {$url}");
                 break;
@@ -289,7 +293,7 @@ trait AmoAPIRequest
                         print_r($params, true)
                     );
                 }
-                $headers     = self::buildHTTPHeaders($subdomain, true);
+                $headers     = self::buildHTTPHeaders($subdomain, true, false, $headers);
                 $requestInfo = ' (POST: ' . $url . ' ' . self::unescapeUnicode($body) . ')';
                 self::debug(
                     '[' . self::$requestCounter . "] POST: {$url}" . PHP_EOL . self::unescapeUnicode($body)
@@ -298,7 +302,7 @@ trait AmoAPIRequest
 
             case 'AJAX':
                 $body        = http_build_query($params);
-                $headers     = self::buildHTTPHeaders($subdomain, true, true);
+                $headers     = self::buildHTTPHeaders($subdomain, true, true, $headers);
                 $requestInfo = ' (POST (AJAX): ' . $url . ' ' . self::unescapeUnicode($body) . ')';
                 self::debug(
                     '[' . self::$requestCounter . '] POST (AJAX): ' . $url . PHP_EOL . self::unescapeUnicode($body)
@@ -524,14 +528,20 @@ trait AmoAPIRequest
 
     /**
      * Формирует массив HTTP-заголовков для запроса.
-     * Включает кастомные заголовки из AmoAPI::$customHeaders.
      *
+     * Приоритет (от низшего к высшему):
+     *   стандартные (Authorization, Content-Type)
+     *   → AmoAPI::$customHeaders (глобальные)
+     *   → $requestHeaders (заголовки конкретного вызова request())
+     *
+     * @param array<string, string> $requestHeaders Заголовки конкретного запроса
      * @return array<string, string>
      */
     protected static function buildHTTPHeaders(
         string $subdomain,
         bool $isPost,
-        bool $isAjax = false
+        bool $isAjax = false,
+        array $requestHeaders = []
     ): array {
         $headers = [];
 
@@ -549,8 +559,8 @@ trait AmoAPIRequest
                 : 'application/json';
         }
 
-        // Кастомные заголовки (перекрывают стандартные, если имена совпадают)
-        return array_merge($headers, self::$customHeaders);
+        // Глобальные кастомные заголовки, затем заголовки конкретного запроса
+        return array_merge($headers, self::$customHeaders, $requestHeaders);
     }
 
     // -----------------------------------------------------------------------------------------------------------------

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\AmoCRM;
 
+use AmoCRM\AmoAPI;
 use PHPUnit\Framework\TestCase;
 use AmoCRM\AmoLead;
 
@@ -122,6 +123,7 @@ class AmoLeadTest extends TestCase
 
     public function testRemoveAndAddCompany()
     {
+        AmoAPI::request('','','','');
         $this->amoLead->company = [ 'id' => 12345678 ];
         $this->amoLead->removeCompany(12345678);
         $this->amoLead->addCompany(12345678);
