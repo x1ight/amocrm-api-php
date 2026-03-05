@@ -83,6 +83,7 @@ abstract class AmoIncomingLead extends AmoObject
      * Приводит модель к формату для передачи в API
      * @return array
      */
+    #[\Override]
     public function getParams() :array
     {
         $params = [];
@@ -122,7 +123,7 @@ abstract class AmoIncomingLead extends AmoObject
         $response = AmoAPI::request(self::URL, 'GET', $params, $this->subdomain);
         $items = AmoAPI::getItems($response);
 
-        $className = get_class($this);
+        $className = static::class;
         if (empty($items)) {
             throw new AmoAPIException("Не найдена сущность {$className} с UID {$uid}");
         }
@@ -204,6 +205,7 @@ abstract class AmoIncomingLead extends AmoObject
      * @param  bool $returnResponse Вернуть ответ сервера вместо массива UID добавленных заявок
      * @return mixed
      */
+    #[\Override]
     public function save(bool $returnResponse = false)
     {
         $params = [ 'add' => [ $this->getParams() ] ];

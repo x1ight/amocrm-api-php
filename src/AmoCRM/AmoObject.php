@@ -111,19 +111,15 @@ abstract class AmoObject
     public $request_id;
 
     /**
-     * Текущий поддомен для доступа к API
-     * @var string
-     */
-    protected $subdomain;
-
-    /**
      * Конструктор
      * @param array $params Параметры модели
      * @param string $subdomain Поддомен amoCRM
      */
-    public function __construct(array $params = [], $subdomain = null)
+    public function __construct(array $params = [], /**
+     * Текущий поддомен для доступа к API
+     */
+    protected $subdomain = null)
     {
-        $this->subdomain = $subdomain;
         $this->fill($params);
     }
 
@@ -185,7 +181,7 @@ abstract class AmoObject
         $response = AmoAPI::request($this::URL, 'GET', $params, $this->subdomain);
         $items = AmoAPI::getItems($response);
 
-        $className = get_class($this);
+        $className = static::class;
         if (empty($items)) {
             throw new AmoAPIException("Не найдена сущность {$className} с ID {$id}");
         }
@@ -349,7 +345,7 @@ abstract class AmoObject
         $items = AmoAPI::getItems($response);
         if (empty($items)) {
             $action = isset($this->id) ? 'обновить' : 'добавить';
-            $className = get_class($this);
+            $className = static::class;
             throw new AmoAPIException(
                 "Не удалось {$action} сущность {$className} (пустой ответ): " . print_r($params, true)
             );

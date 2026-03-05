@@ -96,7 +96,7 @@ trait AmoAPIAuth
         $lastAuth = self::$lastAuth[ $lastRequest['subdomain'] ];
 
         // Выходим, если это запрос авторизации по API-ключу пользователя
-        if (stripos($lastRequest['query'], '/private/api/auth.php') !== false) {
+        if (stripos((string) $lastRequest['query'], '/private/api/auth.php') !== false) {
             return true;
         }
 

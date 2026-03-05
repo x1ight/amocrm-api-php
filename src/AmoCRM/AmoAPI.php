@@ -58,7 +58,7 @@ class AmoAPI
      * @param array|null $response Ответ сервера
      * @return array|null
      */
-    public static function getItems($response)
+    public static function getItems(array $response)
     {
         return $response['_embedded']['items'] ?? null;
     }
@@ -75,7 +75,7 @@ class AmoAPI
     public static function saveObjectsWithLimit(
         $amoObjects,
         bool $returnResponses = false,
-        $subdomain = null,
+        ?string $subdomain = null,
         $limit = 250
     ):array {
         if (! is_array($amoObjects)) {
@@ -103,7 +103,7 @@ class AmoAPI
      * @return array
      * @throws AmoAPIException
      */
-    public static function saveObjects($amoObjects, bool $returnResponses = false, $subdomain = null) :array
+    public static function saveObjects($amoObjects, bool $returnResponses = false, ?string $subdomain = null) :array
     {
         if (! is_array($amoObjects)) {
             $amoObjects = [ $amoObjects ];
@@ -148,7 +148,7 @@ class AmoAPI
      * @return array
      * @throws AmoAPIException
      */
-    public static function deleteObjects($amoObjects, bool $returnResponses = false, $subdomain = null) :array
+    public static function deleteObjects($amoObjects, bool $returnResponses = false, ?string $subdomain = null) :array
     {
         if (! is_array($amoObjects)) {
             $amoObjects = [ $amoObjects ];

@@ -139,7 +139,7 @@ trait AmoAPIGetAllEntities
         $subdomain = null
     ) : Generator {
         $params['limit_rows'] = self::$limitRows;
-        $params['limit_offset'] = $params['limit_offset'] ?? 0;
+        $params['limit_offset'] ??= 0;
 
         while (true) {
             $response = self::request($url, 'GET', $params, $subdomain);
@@ -171,7 +171,7 @@ trait AmoAPIGetAllEntities
         $subdomain = null
     ) : Generator {
         while (true) {
-            $params['page'] = $params['page'] ?? 1;
+            $params['page'] ??= 1;
             $response = self::request('/api/v2/catalog_elements', 'GET', $params, $subdomain);
             if (is_null($response)) {
                 break;

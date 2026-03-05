@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\AmoCRM;
 
+use AmoCRM\AmoAPI;
 use PHPUnit\Framework\TestCase;
 use AmoCRM\AmoLead;
 
@@ -14,7 +15,7 @@ class AmoLeadTest extends TestCase
      */
     private $amoLead;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->amoLead = new AmoLead();
