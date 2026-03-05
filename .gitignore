@@ -5,5 +5,6 @@ cookies/
 tokens/
 .idea/
 vendor/
+composer.lock
 *.log
 *.bak
