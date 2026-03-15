@@ -58,7 +58,7 @@ class AmoAPI
      * @param array|null $response Ответ сервера
      * @return array|null
      */
-    public static function getItems(array $response)
+    public static function getItems(?array $response)
     {
         return $response['_embedded']['items'] ?? null;
     }
@@ -67,7 +67,7 @@ class AmoAPI
      * Сохраняет (добавляет или обновляет) объекты AmoObject с ограничением на число сущностей в одном запросе к API amoCRM
      * @param array|object $amoObjects Массив объектов AmoObject или объект AmoObject
      * @param bool $returnResponses Возвращать массив ответов сервера amoCRM вместо массива параметров сущностей
-     * @param string $subdomain Поддомен amoCRM
+     * @param string|null $subdomain Поддомен amoCRM
      * @param int $limit Максимальное число сущностей в одном запросе к API amoCRM
      * @return array
      * @throws AmoAPIException
@@ -99,7 +99,7 @@ class AmoAPI
      * Сохраняет (добавляет или обновляет) объекты AmoObject
      * @param array|object $amoObjects Массив объектов AmoObject или объект AmoObject
      * @param bool $returnResponses Возвращать массив ответов сервера amoCRM вместо массива параметров сущностей
-     * @param string $subdomain Поддомен amoCRM
+     * @param string|null $subdomain Поддомен amoCRM
      * @return array
      * @throws AmoAPIException
      */
@@ -144,7 +144,7 @@ class AmoAPI
      * Удаляет объекты AmoObject (списки или элементы списков)
      * @param array|object $amoObjects Массив объектов AmoObject или объект AmoObject
      * @param bool $returnResponses Возвращать массив ответов сервера amoCRM вместо массива параметров сущностей
-     * @param string $subdomain Поддомен amoCRM
+     * @param string|null $subdomain Поддомен amoCRM
      * @return array
      * @throws AmoAPIException
      */

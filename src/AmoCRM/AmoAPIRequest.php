@@ -11,7 +11,7 @@
  *
  * v1.0.0 (24.04.2019) Первоначальная версия
  * v2.11.0 (15.05.2022) Добавлена поддержка для AJAX-запросов к frontend-методам
- * v3.0.0 (2024) PHP 8.3, symfony/http-client, symfony/lock (entity + domain locks), custom headers
+ * v3.0.0 (xx.xx.2024) Add support for PHP 8.3, symfony/http-client, symfony/lock (entity + domain locks), custom headers
  *
  */
 
@@ -20,7 +20,6 @@ declare(strict_types=1);
 namespace AmoCRM;
 
 use DateTime;
-use DateTimeZone;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\Lock\Lock;
 use Symfony\Component\Lock\LockFactory;

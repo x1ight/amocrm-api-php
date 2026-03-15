@@ -3,13 +3,14 @@
 ![amoCRM logo](./assets/amocrm-logo.png)  
 
 [![Latest Stable Version](https://poser.pugx.org/andrey-tech/amocrm-api-php/v)](//packagist.org/packages/andrey-tech/amocrm-api-php)
+[![PHP Version Require](https://poser.pugx.org/andrey-tech/amocrm-api-php/require/php)](https://packagist.org/packages/andrey-tech/amocrm-api-php)
 [![Total Downloads](https://poser.pugx.org/andrey-tech/amocrm-api-php/downloads)](//packagist.org/packages/andrey-tech/amocrm-api-php)
 [![GitHub stars](https://img.shields.io/github/stars/andrey-tech/amocrm-api-php)](https://github.com/andrey-tech/amocrm-api-php/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/andrey-tech/amocrm-api-php)](https://github.com/andrey-tech/amocrm-api-php/network)
 [![GitHub watchers](https://img.shields.io/github/watchers/andrey-tech/amocrm-api-php)](https://github.com/andrey-tech/amocrm-api-php/watchers)
 [![License](https://poser.pugx.org/andrey-tech/amocrm-api-php/license)](//packagist.org/packages/andrey-tech/amocrm-api-php)
 
-Простая обертка на PHP7+ для работы с REST API [amoCRM](https://www.amocrm.ru) **v2 (версии 2)** с авторизацией по протоколу oAuth 2.0
+Простая обертка на PHP для работы с REST API [amoCRM](https://www.amocrm.ru) **v2 (версии 2)** с авторизацией по протоколу oAuth 2.0
 или по API-ключу пользователя, поддержкой AJAX-запросов к frontend-методам, троттлингом запросов к API,
 блокировкой одновременного обновления одной сущности и логированием запросов/ответов к API в файл.
 
@@ -117,24 +118,15 @@
 <a id="%D0%A2%D1%80%D0%B5%D0%B1%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F"></a>
 ## Требования
 
-- PHP >= 7.0.
-- Произвольный автозагрузчик классов, реализующий стандарт [PSR-4](https://www.php-fig.org/psr/psr-4/).
+- PHP >= 8.3.
 
 <a id="%D0%A3%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0"></a>
 ## Установка
 
-Установка через composer:
+Установка через Composer:
 ```
-$ composer require andrey-tech/amocrm-api-php:"^2.7"
+$ composer require andrey-tech/amocrm-api-php
 ```
-
-или путем добавления:
-
-```
-"andrey-tech/amocrm-api-php": "^2.7"
-```
-
-в секцию require файла composer.json.
 
 <a id="%D0%90%D0%B2%D1%82%D0%BE%D1%80%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F"></a>
 ## Авторизация
@@ -566,7 +558,7 @@ try {
 
 Работа с заявками из неразобранного существенно отличается от работы с другими сущностями amoCRM.  
 Согласно официальной документации:
-> Изначально неразобранное было в отдельном хранилище и являлось отдельной сущностью именно поэтому до сих пор в интерфейсах amoCRM и в API есть особенности которые отличают поведение сделки в статусе Неразобранное от сделок в других статусах.
+> Изначально неразобранное было в отдельном хранилище и являлось отдельной сущностью именно поэтому до сих пор в интерфейсах amoCRM и в API есть особенности, которые отличают поведение сделки в статусе Неразобранное от сделок в других статусах.
 
 ⚠ &nbsp; Поэтому для моделей заявок из неразобранного не работают следующие методы класса `AmoObject`:
 
@@ -616,7 +608,7 @@ try {
 Класс `AmoAPI` содержит следующие общие статические методы для загрузки сущностей:
 
 - `static getAll<Entities> (array $params, bool $returnResponse = false, string $subdomain = null) :\Generator`
-    Загружает ВСЕ сущности заданного типа <Entities\> c возможностью фильтрации.  
+    Загружает ВСЕ сущности заданного типа <Entities\> с возможностью фильтрации.  
     Возвращает объект типа \Generator для последующей выборки параметров сущностей.
     - `<Entities>`:
         - Contacts
@@ -630,7 +622,7 @@ try {
     - `$returnResponse` - возвращать полный ответ сервера amoCRM вместо массива параметров сущностей;
     - `$subdomain` - поддомен или полный домен amoCRM. Если null, то используется поддомен последней выполненной авторизации.
 - `static get<Entities>(array $params, bool $returnResponse = false, string $subdomain = null) :?array`  
-    Загружает сущности заданного типа <Entities\> c возможностью фильтрации и постраничной выборки.  
+    Загружает сущности заданного типа <Entities\> с возможностью фильтрации и постраничной выборки.  
     Возвращает массив параметров сущностей для заполнения моделей или null.
     - `<Entities>`:
         - Contacts
@@ -1563,7 +1555,7 @@ try {
 
 Работа с заявками из неразобранного существенно отличается от работы с другими сущностями amoCRM.  
 Согласно официальной документации:
-> Изначально неразобранное было в отдельном хранилище и являлось отдельной сущностью именно поэтому до сих пор в интерфейсах amoCRM и в API есть особенности которые отличают поведение сделки в статусе Неразобранное от сделок в других статусах.
+> Изначально неразобранное было в отдельном хранилище и являлось отдельной сущностью именно поэтому до сих пор в интерфейсах amoCRM и в API есть особенности, которые отличают поведение сделки в статусе Неразобранное от сделок в других статусах.
 
 Пример работы с заявками из неразобранного при добавлении из веб-формы.
 ```php
